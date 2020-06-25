@@ -43,9 +43,11 @@ int GetOperatorWeight(char op)
 	case '+':
 	case '-':
 		weight = 1;
+		break;
 	case '*':
 	case '/':
 		weight = 2;
+		break;
 	}
 	return weight;
 }
@@ -65,14 +67,13 @@ void InfixToPostfix(char *s, int n){
   int count = 0;
   for(int i=0; i<n; i++){
     if(s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i]=='/'){
-      if(IsHigherPrecedence(A[top], s[i])){
+      while(top!=-1 && IsHigherPrecedence(A[top], s[i])){
 	c[count] = A[top];
+	count+=1;
 	Pop();
       }
-      else{
-	top+=1;
-	A[top] = s[i];
-      }
+      top+=1;
+      A[top] = s[i];
     }
 
     else {
@@ -81,10 +82,18 @@ void InfixToPostfix(char *s, int n){
     }
   }
 
+  while(top!=-1){
+    c[count] = Top();
+    count +=1;
+    Pop();
+  }
+
 
   for (int j=0; j<strlen(c);j++){
-    printf("%c ", c[j]);
+    printf("%c", c[j]);
   }
+
+  printf("\n");
   
 }
 
