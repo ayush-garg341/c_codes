@@ -67,9 +67,32 @@ int FindMax(struct node* root){
 }
 
 
+int max(int a, int b){
+  return a>b?a:b;
+}
+
+
+int FindHeight(struct node* root){
+  int left_subtree_height;
+  int right_subtree_height;
+  
+  if(root==NULL){
+    return -1;
+  }
+
+  left_subtree_height = FindHeight(root->left);
+  right_subtree_height = FindHeight(root->right);
+
+  return max(left_subtree_height, right_subtree_height) + 1;
+  
+}
+
+
 int main(){
   int min;
   int max;
+  int tree_height;
+    
   struct node* root=NULL;
   root = Insert(2, root);
   root = Insert(4, root);
@@ -81,6 +104,8 @@ int main(){
 
   min = FindMin(root);
   max = FindMax(root);
+
+  tree_height = FindHeight(root);
   
   
   if(Search(0, root)==1){
@@ -92,6 +117,8 @@ int main(){
 
   printf("Minimum is %d\n", min);
   printf("Maximum is %d\n", max);
+
+  printf("Height of tree is %d\n", tree_height);
   
   return 0;
 }
