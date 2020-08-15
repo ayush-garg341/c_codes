@@ -40,7 +40,36 @@ int Search(int data, struct node* root){
 };
 
 
+int FindMin(struct node* root){
+  if(root==NULL){
+    printf("Tree is empty\n");
+    return -1;
+  }
+  else if(root->left==NULL){
+    return root->data;
+  }
+
+  return FindMin(root->left);
+  
+}
+
+int FindMax(struct node* root){
+
+  if(root==NULL){
+    printf("Tree is empty\n");
+    return -1;
+  }
+  else if(root->right==NULL){
+    return root->data;
+  }
+
+  return FindMax(root->right);
+}
+
+
 int main(){
+  int min;
+  int max;
   struct node* root=NULL;
   root = Insert(2, root);
   root = Insert(4, root);
@@ -49,6 +78,10 @@ int main(){
   root = Insert(15, root);
   root = Insert(10, root);
   root = Insert(0, root);
+
+  min = FindMin(root);
+  max = FindMax(root);
+  
   
   if(Search(0, root)==1){
     printf("found\n");
@@ -56,5 +89,9 @@ int main(){
   else{
     printf("Not found\n");
   }
+
+  printf("Minimum is %d\n", min);
+  printf("Maximum is %d\n", max);
+  
   return 0;
 }
