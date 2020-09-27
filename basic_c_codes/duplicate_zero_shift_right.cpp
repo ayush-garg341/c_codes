@@ -6,25 +6,57 @@ using namespace std;
 class Solution {
 public:
   void duplicateZeros(vector<int>& arr) {
-    vector<unsigned int> new_arr;
-    for(int k{0}; k< arr.size(); k++){
-      if(arr[k]==0){
-	new_arr.push_back(0);
-	new_arr.push_back(0);
+    int count_zeros{0};
+    int i{0};
+    int actual_size{0};
+    int j{static_cast<int>(arr.size())-1};
+    char duplicate_last_zero{'0'};
+
+    while(actual_size<arr.size()){
+      if(arr[i]==0){
+	actual_size += 2;
+	count_zeros+=1;
       }
       else{
-	new_arr.push_back(arr[k]);
-	
+	actual_size += 1;
       }
-        arr[k] = new_arr[k];
+      cout<<arr[i]<<"\n";
+      i++;
     }
+
+    if((i-count_zeros + (count_zeros*2)) == arr.size()){
+      duplicate_last_zero =  '1';
+    }
+
+    cout<<"number of elements we can acoomodate in new array " << i << "\n";
+
+    for(int k{i-1}; k>=0;k--){
+      if(arr[k]==0 && (j<arr.size()-1 ||  duplicate_last_zero=='1')){
+      	arr[j]=0;
+      	arr[j-1]=0;
+      	j = j-2;
+      }
+      else{
+      	arr[j]=arr[k];
+      	j = j-1;
+      	
+      }
+      
+    }
+
+    for(int i{0}; i<arr.size(); i++){
+      cout<<"array elements "<< arr[i]<<"\n";
+    }
+
+    cout<<"\n";
+    
   }
 };
 
 
 int main(){
   Solution soln;
-  vector<int> A={1,0,2,3,0,4,5,0};
+  vector<int> A={1,5,2,0,6,8,0,6,0};
   soln.duplicateZeros(A);
   return 0;
 }
