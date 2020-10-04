@@ -5,23 +5,27 @@ using namespace std;
 
 class Solution {
 public:
-    vector<int> sortArrayByParity(vector<int>& A) {
-        vector<int> nums;
-        for(int i{0}; i<A.size(); i++){
-            if(A[i]%2==0){
-	      nums.insert(nums.begin(), A[i]);
-            }
-            else{
-	      nums.push_back(A[i]);
-            }
-        }
-
-	for(int i{0}; i<A.size(); i++){
-	  cout << nums[i] << "\n";
+  vector<int> sortArrayByParity(vector<int>& A) {
+    int l{0};
+    int r{static_cast <int>(A.size())-1};
+    while(l<r){
+      if(A[l]%2!=0){
+	if(A[r]%2==0){
+	  swap(A[l], A[r]);
+	  r--;
 	}
-        
-        return nums;
+	else{
+	  r--;
+	}
+      }
+      else{
+	l++;
+      }
     }
+    
+    
+    return A;
+  }
 };
 
 int main(){
