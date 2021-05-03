@@ -78,9 +78,17 @@ void Merge(int A[], int size){
 }
 
 int main(){
-  //int A[] = {1, 3, 5, 7, 9, 2, 4, 6, 8, 10};
-  int A[] = {1,2,3,4,5,6};
+  int A[] = {1, 2, 3};
+  //int A[] = {10, 5, 30, 23, 21, 49, 32, 99};
   int high = sizeof(A)/sizeof(int);
+  if(high==0){
+    printf("empty arrray passed\n");
+    return 0;
+  }
+  else if(high%2!=0){
+    printf("array must be of even size\n");
+    return 0;
+  }
   Merge(A, high);
   PrintArray(A, high);
   return 0;
