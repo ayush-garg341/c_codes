@@ -25,6 +25,7 @@ class Ball{
   void printRadius();
   
   // The friend keyword specifies that this is a friend function
+  // below line means - non member - setRadius function is allowed to do anything with my private parts.
   friend void setRadius(Ball &b, double r); 
     
 };
@@ -53,3 +54,15 @@ void setRadius(Ball &b, double r){
    cout << "Volume: ";
    b.printVolume();
  }
+
+
+/*
+Properties of friends functions
+1. Not in the scope of class.
+2. Since it is not in the scope of the class , it can not be called from the object of that class. b.setRadius() -> invalid
+3. Can be invoked without the help of any object.
+4. Ususally contains tha objects as arguments.
+5. Can be declared inside public or private section of the class.
+6. It cannot access the members directly  by their names and need object_name.member_name to access the member.
+
+ */

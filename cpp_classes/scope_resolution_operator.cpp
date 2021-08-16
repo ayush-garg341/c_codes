@@ -10,7 +10,7 @@ class Rectangle {
   
   // get and for width
   void setWidth(int w);
-  int getwidth();
+  int getWidth();
   
   int area();
 };
