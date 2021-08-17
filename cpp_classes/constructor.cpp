@@ -8,7 +8,7 @@ class Date {
   int year;
 
   public:
-  // Default constructor
+  // Default constructor is created inside public 
   Date(){
     // We must define the default values for day, month, and year
     day = 0;
@@ -33,3 +33,11 @@ int main(){
 
 
 // The default constructor does not need to be explicitly defined. Even if we don’t create it, the C++ compiler will call a default constructor and set data members to some junk values.
+
+// Constructor is a special member function with the same name as of the class. It is used to initialize the objects of its class.
+
+// It is automatically invoked.
+
+// Do not have return types.
+
+// We cannot refer to their address.

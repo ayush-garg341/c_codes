@@ -6,6 +6,7 @@ class Date {
   int day;
   int month;
   int year;
+  int weekday;
 
   public:
   // Default constructor
@@ -16,13 +17,22 @@ class Date {
     year = 0;
   }
   
-  // Parameterized constructor
-  Date(int d, int m, int y){
+  // Parameterized constructor and also with defualt arguments
+  Date(int d, int m, int y = 2021){
     // The arguments are used as values
     day = d;
     month = m;
     year = y;
   }
+
+  // Constructor overloading. There can be multiple constructor inside the same class.
+  
+  Date(int d, int m){
+    day = d;
+    month = m;
+    year = 2021;
+  }
+
 
   // A simple print function
   void printDate(){ 
@@ -37,3 +47,10 @@ int main(){
   d.printDate();
 }
   
+// Implicit Call
+// Date d(1, 8, 2010);
+
+
+// Explicit Call
+// Date d = Date(1, 8, 2010);
+
