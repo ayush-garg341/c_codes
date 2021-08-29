@@ -84,3 +84,13 @@ int main(){
 
 // class derivedClassName : modeOfInheritance baseClassName
 // There are three modes of class inheritance: public, private and protected.
+
+/*
+  
+  1. Default visibility mode is private. If not provided any mode.
+  2. Private visibility mode: Public members of the base class becomes private members of the derived class.
+  3. Public visibility mode:  Public members of the base class becomes public members of the derived class.
+  4. Private members are never inherited. Only public members of base class can be inherited.
+  5. When we make a derived class, constructor of base class gets called automatically. Hence it becomes important to define default constructor in base class.
+
+ */
