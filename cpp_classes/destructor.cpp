@@ -42,3 +42,5 @@ int main(){
   d.printDate();
 }
   
+
+// Destructor never takes an argument nor does it return any value.
