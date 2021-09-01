@@ -64,3 +64,16 @@ int main(){
   car.car_details();
   //car.print_details();   // public functions of base class are inaccessible in main
 }
+
+
+/*
+
+For protected members:
+
+                              public derivation                  private derivation                      protected derivation
+
+    1. Private members        Not inherited                      Not inherited                           Not inherited
+    2. Protected members      Protected                          Private                                 Protected
+    3. Public members         Public                             Private                                 Protected
+
+ */
