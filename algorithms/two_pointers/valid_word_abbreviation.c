@@ -43,6 +43,8 @@ int is_valid_abbreviation(char *str, char *abbr, int len_str)
                 num--;
             }
 
+            free(idx_int);
+
         }
         else if(abbr[abbr_idx] != str[start])
         {
