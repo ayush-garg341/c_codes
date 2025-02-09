@@ -1,12 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<string.h>
 
-int is_valid_abbreviation(char *str, char *abbr)
+int is_valid_abbreviation(char *str, char *abbr, int len_str)
 {
     int start = 0;
     int abbr_idx = 0;
     int num;
+    int digit_count = 0;
     while(str[start] != '\0')
     {
         if(abbr[abbr_idx] == '0')
@@ -15,20 +15,28 @@ int is_valid_abbreviation(char *str, char *abbr)
         }
         else if(!(abbr[abbr_idx] >= 'a' && abbr[abbr_idx] <= 'z'))
         {
-            if(abbr[abbr_idx+1] != '\0' && !(abbr[abbr_idx+1] >= 'a' && abbr[abbr_idx+1] <= 'z'))
+            digit_count = 1;
+            while(abbr[abbr_idx+1] != '\0' && !(abbr[abbr_idx+1] >= 'a' && abbr[abbr_idx+1] <= 'z'))
             {
-                char *idx_str = malloc(3 * sizeof(char));
-                idx_str[0] = abbr[abbr_idx];
-                idx_str[1] = abbr[abbr_idx+1];
-                idx_str[2] = '\0';
-                num = atoi(idx_str);
-                abbr_idx++;
+                digit_count++;
                 abbr_idx++;
             }
-            else {
-                num = atoi(&abbr[abbr_idx]);
-                abbr_idx++;
+            char* idx_int = malloc(sizeof(char) * (digit_count+1));
+            int idx = 0;
+            for(int i = abbr_idx - digit_count + 1; i <= abbr_idx; i++)
+            {
+                idx_int[idx] = abbr[i];
+                idx++;
             }
+            idx_int[idx] = '\0';
+            num = atoi(idx_int);
+            printf("num = %d \n", num);
+            if(num > len_str - start)
+            {
+                return 0;
+            }
+
+            abbr_idx++;
             while(num > 0)
             {
                 start++;
@@ -59,7 +67,12 @@ int main(int argc, char *argv[])
     char *str = argv[1];
     char *abbr = argv[2];
 
-    int valid_abbrev = is_valid_abbreviation(str, abbr);
+    int len = 0;
+    while(str[len] != '\0')
+    {
+        len++;
+    }
+    int valid_abbrev = is_valid_abbreviation(str, abbr, len);
     printf("%s \n", valid_abbrev?"Valid abbreviation":"Invalid abbreviation");
 
     return 0;
