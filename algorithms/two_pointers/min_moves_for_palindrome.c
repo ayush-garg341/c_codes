@@ -26,37 +26,31 @@ int min_moves(char *target)
         }
         else {
             int j = end;
-            int i = start;
-            while(target[start] != target[end] && start < end)
+            while(target[start] != target[j] && start < j)
             {
-                end--;
+                j--;
             }
-            if(start == end)
+            if(start == j)
             {
                 // Move start into middle
-                int mid = len / 2;
-                while(start < mid)
-                {
-                    swap(target, start, start+1);
-                    start++;
-                    moves++;
-                }
-                start = i;
+                // Not actually moving the middle character, just calculating the num of moves
+                moves += len / 2 - start;
+                start++;
             }
             else {
                 // Move end to jth position and continue
-                while(end < j)
+                while(j < end)
                 {
-                    swap(target, end, end+1);
-                    end++;
+                    swap(target, j, j+1);
+                    j++;
                     moves++;
                 }
-                start = i+1;
+                start++;
                 end--;
             }
         }
     }
-
+    printf("%s\n", target);
     return moves;
 }
 
