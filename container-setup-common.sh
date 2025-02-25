@@ -31,7 +31,7 @@ apt-get -y install\
  git-doc\
  man\
  micro\
- nano\
+ vim\
  psmisc\
  sudo\
  wget\

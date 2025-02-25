@@ -12,9 +12,9 @@ https://stackoverflow.com/questions/5134891/how-do-i-use-valgrind-to-find-memory
 
 #include "ht.h"
 
-#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 // Example:
 // $ echo 'foo bar the bar bar bar the' | ./demo
@@ -36,8 +36,17 @@ int main(void) {
 
     // Read next word from stdin (at most 100 chars long).
     char word[101];
-    while (scanf("%100s", word) != EOF) {
+    while (fgets(word, sizeof(word), stdin) != NULL) {
+        // Remove the newline character if present.
+        word[strcspn(word, "\n")] = '\0';
+        printf("size of word %lu\n", sizeof(word));
+        printf("Word: %s, Length: %zu\n", word, strlen(word));
+
         // Look up word.
+        if(strcmp(word, "exit") == 0)
+        {
+            break;
+        }
         void* value = ht_get(counts, word);
         if (value != NULL) {
             // Already exists, increment int that value points to.
