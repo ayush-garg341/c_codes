@@ -6,3 +6,6 @@
 *.a
 *.so
 .bash_history
+
+# Don't ignore folders (important for seeing new files inside them)
+!*/
