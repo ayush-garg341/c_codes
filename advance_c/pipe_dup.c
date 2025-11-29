@@ -84,13 +84,19 @@ int main() {
 
     close(pipefd[0]);
 
-    // Wait for child to finish
+    // Wait for child to finish, prevents parent from finishing early.
     int status;
     waitpid(pid, &status, 0);
 
     printf("\nParent summary: Found %d regular files in /usr/lib\n", file_count);
     return 0;
 }
+
+// After fork(), parent and child become two completely separate processes and they run independently, concurrently, and in parallel (depending on CPU cores).
+// After fork, the memory is duplicated with Copy-on-Write. They run independently in separate address spaces.
+// COW: Parent and child share the same physical memory pages. They are marked as read-only and shared. Neither process knows they are shared—the OS manages it.
+// So when is the memory actually copied? Not at fork time. The copy happens only if and when: Either parent or child tries to write to a shared page.
+// On exec -> Child replaces all memory -> COW discarded. exec() throws away the entire address space of the calling process (the child) and loads a completely new program. None of the old pages are kept. They are replaced with new code (.text), new data (.data, .bss), new stack, new heap, new shared libraries, new environment, new argv. This is a complete memory replacement. Since the child discards ALL the shared pages, the OS NEVER needs to copy anything.
 
 // dup -> int newfd = dup(oldfd);
 // Kernel finds the lowest-numbered unused FD
