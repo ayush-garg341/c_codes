@@ -17,50 +17,27 @@ int main()
     //     printf("Token: %s\n", token);
     //     token = strtok(NULL, delimeter);
     // }
-    int i = 0;
-    int file_name_len = 0;
-    int space_count = 0;
-    int first_space_index = 0;
-    while(buffer[i] != '\0')
+
+    char *filename = malloc(sizeof(char()) * 256);
+    int rsi = 0; // will represent rsi register for finding first space index
+    int rcx = 0; // index used for copying into filename
+
+    while(buffer[rsi] != ' ')
     {
-        if(buffer[i] != ' ')
-        {
-            printf("%c ", buffer[i]);
-        }
-        else
-        {
-            space_count++;
-            if(space_count == 1) {
-                file_name_len = i+1;
-                first_space_index = i+1;
-            }
-            if(space_count == 2)
-            {
-                file_name_len = i - file_name_len;
-                break;
-            }
-        }
-        i++;
+        rsi++;
     }
 
-    printf("first space %d and file name len %d\n", first_space_index, file_name_len);
-    i = 0;
-    char* file_name = malloc(sizeof(char) * (file_name_len + 1));
-    while(buffer[first_space_index] != '\0')
+    rsi++; // next char to first space
+    while(buffer[rsi] != ' ')
     {
-        if(buffer[first_space_index] == ' ')
-        {
-            break;
-        }
-        else {
-            file_name[i] = buffer[first_space_index];
-            i++;
-        }
-        first_space_index += 1;
+        filename[rcx] = buffer[rsi];
+        rsi++;
+        rcx++;
     }
-    file_name[file_name_len+1] = '\0';
 
-    printf("file name: %s \n", file_name);
+    filename[rcx] = '\0'; // null terminating the string
+
+    printf("Filename: %s\n", filename);
 
     return 0;
 }
