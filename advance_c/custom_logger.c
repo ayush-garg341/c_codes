@@ -6,7 +6,7 @@
 
 static void dbg(char* description, char* fmt, ...)
 {
-    (void)description;
+    (void)description; // These lines suppress compiler warnings when DEBUG_PRINT is 0, and the parameters are unused.
     (void)fmt;
 
 #if(DEBUG_PRINT == 1)
