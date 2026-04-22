@@ -141,6 +141,12 @@ int main() {
 
 // CSR format
 // CSR compresses the matrix into 3 arrays storing only the non-zero values:
+// Matrix has only 4 non-zero: 3, 1, 4, 2:
+// 0  0  3  0
+// 0  0  0  0
+// 1  0  0  4
+// 0  2  0  0
+
 // data — the non-zero values themselves
 // col_idx — which column each value is in
 // row_ptr — where each row starts in the data array
